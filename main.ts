@@ -1,6 +1,6 @@
-import { BrowserWindow, app } from 'electron';
+import { BrowserWindow, app, ipcMain, ipcRenderer } from 'electron';
 
-const createWindow = () => {
+const createMainWindow = () => {
   const win = new BrowserWindow({
     width: 800,
     height: 600
@@ -9,11 +9,20 @@ const createWindow = () => {
   win.loadFile('build/index.html')
 }
 
+const createLoginWindow = () => {
+    const win = new BrowserWindow({
+        width: 800,
+        height: 600,
+    })
+
+    win.loadFile('build/login.html')
+}
+
 app.whenReady().then(() => {
-  createWindow()
+    createMainWindow()
 
   app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    if (BrowserWindow.getAllWindows().length === 0) createMainWindow()
   })
 })
 
