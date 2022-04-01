@@ -1,8 +1,9 @@
 {
-  "name": "my-app",
+  "name": "BotsOn",
   "version": "0.1.0",
   "private": true,
   "homepage": "./",
+  "main": "./build/main.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
@@ -22,7 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electronTs": "npx tsc main.ts --outDir build/",
+    "testing": "npx tsc main.ts --outDir build/ && electron ."
   },
   "eslintConfig": {
     "extends": [
