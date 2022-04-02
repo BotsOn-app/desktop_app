@@ -51,6 +51,9 @@ ipcMain.on('new-bot', async (event, token) => {
 
   let bot = Bot.add({
     id: response.data.id,
+    name: response.data.username,
+    avatarURL: `https://cdn.discordapp.com/avatars/${response.data.id}/${response.data.avatar}.png`,
+    accent_color: response.data.accent_color,
     token: token,
     extensions: []
   })

@@ -6,7 +6,7 @@ export class HomePage extends React.Component {
     getBots () {
         return window.api.on("bots", (bots: BotInterfaces[]) => {
             let map = bots.map((bot: BotInterfaces) => {
-                return <li>{bot.token}</li>
+                return <li>{bot.name}</li>
             })
 
             return ReactDOM.render(

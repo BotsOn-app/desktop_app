@@ -3,6 +3,9 @@ import * as fs from 'fs';
 
 export interface BotInterfaces {
   id: string
+  name: string
+  avatarURL: string
+  accent_color: number
   token: string
   extensions: string[]
 }
