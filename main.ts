@@ -1,6 +1,7 @@
 import { BrowserWindow, app } from 'electron';
 import { ipcMain } from 'electron/main';
 import * as fs from 'fs';
+import { BotInterfaces } from './src/interfaces/BotsInterfaces';
 
 const createMainWindow = () => {
   const win = new BrowserWindow({
@@ -37,9 +38,7 @@ app.on('window-all-closed', () => {
 
 // Add e new discord bot in appdata folder for save the token and extensions
 ipcMain.on('new-bot', (event, token) => {
-  console.log(token)
   let appData = app.getPath("userData")
-  console.log(appData)
   let bot = {
     token: token,
     extensions: []
@@ -49,10 +48,18 @@ ipcMain.on('new-bot', (event, token) => {
     fs.writeFileSync(appData + "\\bots.json", JSON.stringify([bot]))
   }
 
-  let bots = require(appData + "/bots.json")
+  // verif bot not already exist
+  let bots: BotInterfaces[] = require(appData + "/bots.json")
+  let tokens: string[] = bots.map(bot => bot.token)
+ 
+  if (tokens.includes(token)) {
+    event.sender.send('bot-already-exist')
+    return console.log("bot already exist")
+  }
+
   bots.push(bot)
   fs.writeFileSync(appData + "/bots.json", JSON.stringify(bots))
-  // event.sender.send('bot-added', bot)
+  event.sender.send('bot-added', bot)
 })
 
 // Get all bots in appdata folder
@@ -61,3 +68,5 @@ ipcMain.on('get-bots', (event) => {
   let bots = require(appData + "/bots.json")
   // event.sender.send('bots-loaded', bots)
 })
+
+
