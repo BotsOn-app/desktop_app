@@ -1,7 +1,17 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { BotInterfaces } from './src/app/bots';
 
-contextBridge.exposeInMainWorld("electron", {
+contextBridge.exposeInMainWorld("api", {
+    on : (event, callback) => {
+        ipcRenderer.on(event, (event, ...args) => {
+            callback(...args)
+        })
+    },
+    bots: () => async () => {
+        ipcRenderer.on("bots", (e, bots: BotInterfaces[]) => {
+            return bots.map(bot => {return `<li>${bot.id}</li>`}).join('')
+        })
+    },
     newBot: (options: BotInterfaces) => {
         ipcRenderer.send("new-bot", options)
     },
@@ -17,10 +27,6 @@ contextBridge.exposeInMainWorld("electron", {
     addExtensionBot: (botId: string, extension: string) => {
         ipcRenderer.send("add-extension-bot", botId, extension)
     }
-})
-
-ipcRenderer.on("bots", (e, bots) => {
-    console.log(bots)
 })
 
 ipcRenderer.on("get-bot", (e, bot) => {
