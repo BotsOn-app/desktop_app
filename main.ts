@@ -1,7 +1,7 @@
 import { BrowserWindow, app } from 'electron';
 import { ipcMain } from 'electron/main';
 import { Bot } from './src/app/bots';
-import * as http from 'http'
+import * as axios from 'axios'
 
 const createMainWindow = () => {
   const win = new BrowserWindow({
@@ -38,25 +38,25 @@ app.on('window-all-closed', () => {
 
 // Add e new discord bot in appdata folder for save the token and extensions
 ipcMain.on('new-bot', async (event, token) => {
-  http.request('http://discordapp.com/api/v10/users/@me', {
+  let response = await axios.default.get('https://discord.com/api/v10/users/@me', {
     headers: {
       Authorization: `Bot ${token}`
-    }
-  }, async (req) => {
-    let body = ''
-    req.on('data', (chunk) => {
-      body += chunk
-    })
-    req.on('end', () => {
-      let bot = JSON.parse(body)
-      return Bot.add({
-        id: bot.id,
-        token: token,
-        extensions: []
-      })
-    })
+    }  
   })
 
+  if (response.status !== 200) {
+    event.sender.send('new-bot-error', 'Invalid token')
+    return
+  }
+
+  let bot = Bot.add({
+    id: response.data.id,
+    token: token,
+    extensions: []
+  })
+
+  console.log(bot)
+  event.sender.send('new-bot-reply', bot)
 })
 
 // Get all bots in appdata folder
