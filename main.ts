@@ -1,7 +1,7 @@
 import { BrowserWindow, app } from 'electron';
 import { ipcMain } from 'electron/main';
-import * as fs from 'fs';
-import { BotInterfaces } from './src/interfaces/BotsInterfaces';
+import { Bot } from './src/app/bots';
+import * as http from 'http'
 
 const createMainWindow = () => {
   const win = new BrowserWindow({
@@ -37,36 +37,54 @@ app.on('window-all-closed', () => {
 })
 
 // Add e new discord bot in appdata folder for save the token and extensions
-ipcMain.on('new-bot', (event, token) => {
-  let appData = app.getPath("userData")
-  let bot = {
-    token: token,
-    extensions: []
-  }
-  // verif bots.json exist
-  if (!fs.existsSync(appData + "\\bots.json")) {
-    fs.writeFileSync(appData + "\\bots.json", JSON.stringify([bot]))
-  }
+ipcMain.on('new-bot', async (event, token) => {
+  http.request('http://discordapp.com/api/v10/users/@me', {
+    headers: {
+      Authorization: `Bot ${token}`
+    }
+  }, async (req) => {
+    let body = ''
+    req.on('data', (chunk) => {
+      body += chunk
+    })
+    req.on('end', () => {
+      let bot = JSON.parse(body)
+      return Bot.add({
+        id: bot.id,
+        token: token,
+        extensions: []
+      })
+    })
+  })
 
-  // verif bot not already exist
-  let bots: BotInterfaces[] = require(appData + "/bots.json")
-  let tokens: string[] = bots.map(bot => bot.token)
- 
-  if (tokens.includes(token)) {
-    event.sender.send('bot-already-exist')
-    return console.log("bot already exist")
-  }
-
-  bots.push(bot)
-  fs.writeFileSync(appData + "/bots.json", JSON.stringify(bots))
-  event.sender.send('bot-added', bot)
 })
 
 // Get all bots in appdata folder
 ipcMain.on('get-bots', (event) => {
-  let appData = app.getPath("userData")
-  let bots = require(appData + "/bots.json")
-  // event.sender.send('bots-loaded', bots)
+  let bots = Bot.getAll()
+  event.sender.send('bots', bots)
 })
 
+// Get specific bot in appdata folder
+ipcMain.on('get-bot', (event, id) => {
+  let bot = Bot.get(id)
+  event.sender.send('bot', bot)
+})
 
+// Delete specific bot in appdata folder
+ipcMain.on('delete-bot', (event, id) => {
+  let bot = Bot.delete(id)
+  event.sender.send('delete-bot', bot)
+})
+
+// add extension to specific bot in appdata folder
+ipcMain.on('add-extension-bot', (event, botId, extension) => {
+  let bot = Bot.addExtension(botId, extension)
+  event.sender.send('add-extension-bot', bot)
+})
+
+// remove extension to specific bot in appdata folder
+ipcMain.on('remove-extension-bot', (event, botId, extension) => {
+  let bot = Bot.removeExtension(botId, extension)
+  event.sender.send('remove-extension-bot', bot)
+})
