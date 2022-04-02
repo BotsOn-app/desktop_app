@@ -25,8 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electronTs": "npx tsc main.ts --outDir build/",
-    "testing": "npm run build && npx tsc main.ts --outDir build/ && electron ."
+    "dist": "npx tsc main.ts preload.ts --outDir build/",
+    "testing": "npm run build && npm run dist && electron ."
   },
   "eslintConfig": {
     "extends": [
