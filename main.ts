@@ -3,6 +3,8 @@ import { ipcMain } from 'electron/main';
 import { Bot } from './src/app/bots';
 import * as axios from 'axios'
 import * as discordRPC from 'discord-rpc'
+import { Extension } from './src/app/extensions';
+import * as fs from 'fs';
 
 const createMainWindow = () => {
   const win = new BrowserWindow({
@@ -26,7 +28,7 @@ const createLoginWindow = () => {
 }
 
 app.whenReady().then(() => {
-    createMainWindow()
+  createMainWindow()
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createMainWindow()
@@ -112,6 +114,16 @@ ipcMain.on('delete-bot', (event, id) => {
   event.sender.send('delete-bot-reply', bot)
 })
 
+// get all extensions in specific bot
+ipcMain.on('get-extensions-bot', (event, botId) => {
+  let bot = Bot.get(botId)
+  if (!bot) {
+    event.sender.send('get-extensions-bot-reply', false)
+    return
+  }
+  event.sender.send('get-extensions-bot-reply', bot.extensions)
+})
+
 // add extension to specific bot in appdata folder
 ipcMain.on('add-extension-bot', (event, botId, extension) => {
   let bot = Bot.addExtension(botId, extension)
@@ -122,4 +134,16 @@ ipcMain.on('add-extension-bot', (event, botId, extension) => {
 ipcMain.on('remove-extension-bot', (event, botId, extension) => {
   let bot = Bot.removeExtension(botId, extension)
   event.sender.send('remove-extension-bot-reply', bot)
+})
+
+// add extension in appdata folder
+ipcMain.on('add-extension', (event, extension) => {
+  let bot = Extension.add(extension)
+  event.sender.send('add-extension-reply', bot)
+})
+
+// remove extension in appdata folder
+ipcMain.on('remove-extension', (event, extension) => {
+  let bot = Extension.delete(extension)
+  event.sender.send('remove-extension-reply', bot)
 })

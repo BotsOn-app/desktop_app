@@ -12,7 +12,16 @@ export interface BotInterfaces {
 
 export class Bot {
   private static appData = app.getPath("userData")
-  private static bots: BotInterfaces[] = require(this.appData + "/bots.json")
+  private static bots: BotInterfaces[] = this.loadBots()
+
+  private static loadBots(): BotInterfaces[] {
+    // Verif bots.json exist or create it
+    if (!fs.existsSync(this.appData + "/bots.json")) {
+      fs.writeFileSync(this.appData + "/bots.json", JSON.stringify([]))
+    }
+
+    return require(this.appData + "/bots.json")
+  }
 
   public static fromJSON(json: BotInterfaces): Bot {
     return Bot.get(json.id)
