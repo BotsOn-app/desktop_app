@@ -6,8 +6,8 @@ import * as discordRPC from 'discord-rpc'
 
 const createMainWindow = () => {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1440,
+    height: 1024,
     webPreferences: {
       preload: __dirname + '\\preload.js'
     }
@@ -66,6 +66,7 @@ rpc.on('ready', () => {
 
 rpc.login({ clientId }).catch(console.error)
 
+// Global IPC
 
 // Add e new discord bot in appdata folder for save the token and extensions
 ipcMain.on('new-bot', async (event, token) => {
