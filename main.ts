@@ -2,6 +2,7 @@ import { BrowserWindow, app } from 'electron';
 import { ipcMain } from 'electron/main';
 import { Bot } from './src/app/bots';
 import * as axios from 'axios'
+import * as discordRPC from 'discord-rpc'
 
 const createMainWindow = () => {
   const win = new BrowserWindow({
@@ -35,6 +36,36 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
+
+// Create RPC client
+const clientId = "960100262914183178"
+
+discordRPC.register(clientId)
+
+const rpc = new discordRPC.Client({ transport: 'ipc' })
+const startTimestamp = new Date()
+
+rpc.on('ready', () => {
+  rpc.setActivity({
+    details: 'Dans le monde des bots',
+    state: 'BotsOn',
+    startTimestamp,
+    largeImageKey: 'logo',
+    largeImageText: 'BotsOn - Create Discord Bots',
+    // smallImageKey: 'icon du bot',
+    // smallImageText: 'Nom du bot',
+    instance: false,
+    buttons: [
+      {
+        label: 'Website',
+        url: 'https://botson.app'
+      },
+    ]
+  })
+})
+
+rpc.login({ clientId }).catch(console.error)
+
 
 // Add e new discord bot in appdata folder for save the token and extensions
 ipcMain.on('new-bot', async (event, token) => {
