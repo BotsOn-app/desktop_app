@@ -7,10 +7,8 @@ contextBridge.exposeInMainWorld("api", {
             callback(...args)
         })
     },
-    bots: () => async () => {
-        ipcRenderer.on("bots", (e, bots: BotInterfaces[]) => {
-            return bots.map(bot => {return `<li>${bot.id}</li>`}).join('')
-        })
+    send : (event, ...args) => {
+        ipcRenderer.send(event, ...args)
     },
     newBot: (options: BotInterfaces) => {
         ipcRenderer.send("new-bot", options)
@@ -27,20 +25,4 @@ contextBridge.exposeInMainWorld("api", {
     addExtensionBot: (botId: string, extension: string) => {
         ipcRenderer.send("add-extension-bot", botId, extension)
     }
-})
-
-ipcRenderer.on("get-bot", (e, bot) => {
-    console.log(bot)
-})
-
-ipcRenderer.on("delete-bot", (e, bot) => {
-    console.log(bot)
-})
-
-ipcRenderer.on("add-extension-bot", (e, bot) => {
-    console.log(bot)
-})
-
-ipcRenderer.on("add-extension-bot", (e, bot) => {
-    console.log(bot)
 })

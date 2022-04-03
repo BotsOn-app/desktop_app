@@ -97,29 +97,29 @@ ipcMain.on('new-bot', async (event, token) => {
 // Get all bots in appdata folder
 ipcMain.on('get-bots', (event) => {
   let bots = Bot.getAll()
-  event.sender.send('bots', bots)
+  event.sender.send('get-bots-reply', bots)
 })
 
 // Get specific bot in appdata folder
 ipcMain.on('get-bot', (event, id) => {
   let bot = Bot.get(id)
-  event.sender.send('bot', bot)
+  event.sender.send('get-bot-reply', bot)
 })
 
 // Delete specific bot in appdata folder
 ipcMain.on('delete-bot', (event, id) => {
   let bot = Bot.delete(id)
-  event.sender.send('delete-bot', bot)
+  event.sender.send('delete-bot-reply', bot)
 })
 
 // add extension to specific bot in appdata folder
 ipcMain.on('add-extension-bot', (event, botId, extension) => {
   let bot = Bot.addExtension(botId, extension)
-  event.sender.send('add-extension-bot', bot)
+  event.sender.send('add-extension-bot-reply', bot)
 })
 
 // remove extension to specific bot in appdata folder
 ipcMain.on('remove-extension-bot', (event, botId, extension) => {
   let bot = Bot.removeExtension(botId, extension)
-  event.sender.send('remove-extension-bot', bot)
+  event.sender.send('remove-extension-bot-reply', bot)
 })

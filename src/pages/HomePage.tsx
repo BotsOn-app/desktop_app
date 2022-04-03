@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 export class HomePage extends React.Component {
 
     getBots () {
-        return window.api.on("bots", (bots: BotInterfaces[]) => {
+        return window.api.on("get-bots-reply", (bots: BotInterfaces[]) => {
             let map = bots.map((bot: BotInterfaces) => {
                 return <li>{bot.name}</li>
             })

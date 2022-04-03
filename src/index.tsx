@@ -10,7 +10,7 @@ import { HomePage } from './pages/HomePage';
 
 declare global {
   interface Window {
-      api? : any
+    api? : any
   }
 }
 
