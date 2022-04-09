@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import { HomePage } from './pages/HomePage';
 import { BotPage } from './pages/BotPage';
 import { SettingsPage } from './pages/SettingsPage';
+import "./styles/scss/main.scss";
 
 declare global {
   interface Window {
