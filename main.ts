@@ -4,7 +4,6 @@ import { Bot } from './src/app/bots';
 import * as axios from 'axios'
 import * as discordRPC from 'discord-rpc'
 import { Extension } from './src/app/extensions';
-import * as fs from 'fs';
 
 const createMainWindow = () => {
   const win = new BrowserWindow({
