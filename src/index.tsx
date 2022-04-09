@@ -4,9 +4,10 @@ import {
   Route
 } from "react-router-dom";
 import ReactDOM from 'react-dom';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { HomePage } from './pages/HomePage';
+import { BotPage } from './pages/BotPage';
+import { SettingsPage } from './pages/SettingsPage';
 
 declare global {
   interface Window {
@@ -18,6 +19,8 @@ ReactDOM.render(
   <Router>
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/bot/:id" element={<BotPage />} />
+      <Route path="/settings" element={<SettingsPage />} />
     </Routes>
   </Router>,
   document.getElementById('root')
