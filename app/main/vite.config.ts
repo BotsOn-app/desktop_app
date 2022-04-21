@@ -22,6 +22,7 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
+        'discord-rpc',
         'electron',
         ...builtinModules,
         ...Object.keys(pkg.dependencies || {}),
