@@ -1,10 +1,10 @@
 {
   "name": "botson",
-  "productName": "Electron",
+  "productName": "BotsOn",
   "private": true,
   "version": "0.1.0",
-  "description": "Vite React Electron boilerplate.",
-  "author": "草鞋没号 <308487730@qq.com>",
+  "description": "Botson and an application to manage and control your bots without knowing how to code and as easily as possible.",
+  "author": "botson",
   "license": "MIT",
   "main": "dist/main/index.cjs",
   "scripts": {
