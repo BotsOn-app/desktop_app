@@ -1,8 +1,6 @@
 import { app, BrowserWindow, shell } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
-import './samples/electron-store'
-import './samples/npm-esm-packages'
 import './samples/discord-rpc'
 
 // Disable GPU Acceleration for Windows 7
