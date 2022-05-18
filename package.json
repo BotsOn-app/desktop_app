@@ -9,8 +9,8 @@
         "electron": "wait-on http://localhost:3000 && cross-env ELECTRON_IS_DEV=true electron .",
         "compile-tsc": "tsc && npm run electron",
         "start": "concurrently -k \"npm run svelte:dev\" \"npm run compile-tsc\"",
-        "svelte:dev": "cd renderer && npm run dev",
-        "svelte:build": "cd renderer && npm run build"
+        "svelte:dev": "cd render && npm run dev",
+        "svelte:build": "cd render && npm run build"
     },
     "author": "",
     "license": "ISC",
