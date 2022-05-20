@@ -1,43 +1,31 @@
 {
-  "name": "botson",
-  "productName": "Electron",
+  "name": "svelte-app",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.1.0",
-  "description": "Vite React Electron boilerplate.",
-  "author": "草鞋没号 <308487730@qq.com>",
-  "license": "MIT",
-  "main": "dist/main/index.cjs",
   "scripts": {
-    "dev": "node scripts/watch.mjs",
-    "build": "tsc --noEmit -p packages/renderer/tsconfig.json && node scripts/build.mjs && electron-builder"
-  },
-  "engines": {
-    "node": ">=14.17.0"
-  },
-  "dependencies": {
-    "electron-store": "^8.0.1"
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public --no-clear",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
-    "@types/react": "^18.0.1",
-    "@types/react-dom": "^18.0.0",
-    "@vitejs/plugin-react": "^1.3.0",
-    "discord-rpc": "^4.0.1",
-    "electron": "18.0.3",
-    "electron-builder": "^23.0.3",
-    "execa": "^6.1.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-router-dom": "^6.3.0",
-    "sass": "^1.50.0",
-    "typescript": "^4.6.3",
-    "vite": "^2.9.1",
-    "vite-plugin-esmodule": "^1.2.5",
-    "vite-plugin-optimizer": "^1.3.3",
-    "vite-plugin-resolve": "^2.0.4",
-    "web-vitals": "^2.1.4"
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.0.0",
+    "svelte-check": "^2.0.0",
+    "svelte-preprocess": "^4.0.0",
+    "@rollup/plugin-typescript": "^8.0.0",
+    "typescript": "^4.0.0",
+    "tslib": "^2.0.0",
+    "@tsconfig/svelte": "^2.0.0"
   },
-  "env": {
-    "VITE_DEV_SERVER_HOST": "127.0.0.1",
-    "VITE_DEV_SERVER_PORT": 7777
+  "dependencies": {
+    "electron": "^18.2.4",
+    "sirv-cli": "^2.0.0"
   }
 }
