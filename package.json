@@ -2,9 +2,12 @@
   "name": "svelte-app",
   "version": "1.0.0",
   "private": true,
+  "main": "./app/index.ts",
+  "type": "module",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
+    "dev:main": "npm run build && electron .",
     "start": "sirv public --no-clear",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
