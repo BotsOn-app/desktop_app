@@ -1,8 +1,10 @@
-import { app, BrowserWindow } from "electron"
+import App from "./App.svelte";
 
-let win = new BrowserWindow({
-    width: 800,
-    height: 600,
-})
+const app = new App({
+	target: document.body,
+	props: {
+		name: "world",
+	},
+});
 
-win.loadFile("../static/index.html")
+export default app;
