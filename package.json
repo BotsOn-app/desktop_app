@@ -2,9 +2,9 @@
   "name": "desktop",
   "version": "1.0.0",
   "private": true,
-  "main": "./app/index.js",
+  "main": "./dist/index.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && cd app && tsc",
     "dev": "rollup -c -w",
     "dev:main": "npm run build && electron .",
     "start": "sirv public --no-clear",
