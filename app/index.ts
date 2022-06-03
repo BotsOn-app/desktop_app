@@ -1,5 +1,7 @@
-import { app, BrowserWindow, ipcMain } from "electron"
+import { app, BrowserWindow, ipcMain, protocol } from "electron"
 import { join } from "path"
+
+import "dotenv/config"
 
 app.whenReady().then(main);
 
@@ -13,6 +15,9 @@ function main() {
 			preload: join(__dirname, "preload.js"),
 		}
 	});
+
+	if (process.env.DEV_MODE == "true") window.webContents.openDevTools({ mode: 'detach' });
+
 	window.loadFile(join(__dirname, "../public/index.html"));
 }
 
