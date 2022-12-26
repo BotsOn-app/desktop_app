@@ -55,10 +55,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
-        "resizable": true,
+        "height": 720,
+        "resizable": false,
         "title": "botson app",
-        "width": 800
+        "width": 1080
       }
     ]
   }
