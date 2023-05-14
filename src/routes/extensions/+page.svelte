@@ -2,4 +2,4 @@
 	import Text from '$utils/Text.svelte';
 </script>
 
-<div />
+<div class="w-full" />

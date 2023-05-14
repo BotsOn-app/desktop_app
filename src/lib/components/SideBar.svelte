@@ -8,7 +8,9 @@
 	});
 </script>
 
-<aside class="bg-original-gray flex justify-center items-center h-screen w-24 overflow-hidden">
+<aside
+	class="bg-original-gray flex justify-center items-center h-screen w-24 overflow-hidden min-w-[6rem]"
+>
 	<ul class="flex flex-col h-40 justify-between items-center">
 		<li>
 			<a href="/" class="relative">
