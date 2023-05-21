@@ -12,7 +12,9 @@
 
 <button
 	on:click={action}
-	class="flex justify-center items-center {buttonStyleApplier[buttonType]} h-12 w-12 rounded-xl"
+	class="flex justify-center items-center {buttonStyleApplier[
+		buttonType
+	]} h-12 w-12 rounded-xl hover:bg-opacity-50 transition ease-in-out"
 >
 	<slot />
 </button>
