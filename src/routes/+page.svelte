@@ -1,11 +1,22 @@
 <script>
 	import BotCard from '$lib/components/home/BotCard.svelte';
+	import Button from '$lib/components/utils/Button.svelte';
+	import Text from '$lib/components/utils/Text.svelte';
+	export let data;
 </script>
 
 <!-- Kinda like the homepage -->
 <main class="w-full p-16 ">
-	<BotCard
-		imgUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/1200px-Cat_November_2010-1a.jpg"
-		name="Helloworld"
-	/>
+	<div>
+		<Text class="text-4xl font-bold mb-2">Bonjour {data.username} 👋</Text>
+		<Text class="text-xl mb-8">Sélectionnez votre bot :</Text>
+	</div>
+	<div class="mb-12">
+		{#each data.bots as bot}
+			<BotCard imgUrl={bot.imgUrl} name={bot.name} />
+		{/each}
+	</div>
+	<Button style="primary" action={() => {}}>
+		Ajoutez un bot <box-icon name="right-arrow-alt" color="white" />
+	</Button>
 </main>

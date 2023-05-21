@@ -3,7 +3,7 @@
 	let buttonStyleApplier: { [key: string]: string } = {
 		danger: 'bg-original-red',
 		info: 'bg-original-light-gray',
-		ok: 'bg-original-light-purple',
+		ok: 'bg-original-purple',
 	};
 
 	export let buttonType: ButtonStyle;
@@ -12,9 +12,7 @@
 
 <button
 	on:click={action}
-	class="flex justify-center items-center {buttonStyleApplier[
-		buttonType
-	]} bg-original h-12 w-12 rounded-xl"
+	class="flex justify-center items-center {buttonStyleApplier[buttonType]} h-12 w-12 rounded-xl"
 >
 	<slot />
 </button>
