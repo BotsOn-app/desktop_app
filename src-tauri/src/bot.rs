@@ -1,6 +1,6 @@
 pub struct Bot {
     token: String,
-    path: Option<String>,
+    path: String,
     extensions: Vec<Extension>,
 }
 
@@ -8,9 +8,14 @@ pub struct Extension();
 
 impl Bot {
     pub fn new(token: String, path: Option<String>, extensions: Vec<Extension>) -> Self {
+        // Handle default path
+        let _path = match path {
+            Some(value) => value,
+            None => "".to_owned(), // we have to actually determine what is the default path x)
+        };
         Bot {
             token,
-            path,
+            path: _path,
             extensions,
         }
     }
