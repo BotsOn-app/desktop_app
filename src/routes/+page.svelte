@@ -2,7 +2,12 @@
 	import BotCard from '$lib/components/home/BotCard.svelte';
 	import Button from '$lib/components/utils/Button.svelte';
 	import Text from '$lib/components/utils/Text.svelte';
+	import { invoke } from '@tauri-apps/api/tauri';
 	export let data;
+
+	const openNewBotDialog = () => {
+		invoke('create_bot', { token: 'data', clientId: 'data', guildId: 'data' });
+	};
 </script>
 
 <!-- Kinda like the homepage -->
@@ -17,7 +22,7 @@
 		{/each}
 	</div>
 	<!-- Issue with arrow that should be fatter and isn't aligned with the rest of the text -->
-	<Button style="primary" action={() => {}}>
+	<Button style="primary" action={() => openNewBotDialog()}>
 		Ajoutez un bot <box-icon name="right-arrow-alt" color="white" />
 	</Button>
 </main>

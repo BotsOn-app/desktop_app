@@ -1,6 +1,5 @@
 <script lang="ts">
 	import 'boxicons';
-	import { pageSelector } from '$lib/functions/stores';
 	import SideBarItem from './SideBar/SideBarItem.svelte';
 
 	let items = [
