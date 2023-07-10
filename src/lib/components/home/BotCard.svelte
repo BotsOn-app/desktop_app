@@ -9,23 +9,22 @@
 	const fac = new FastAverageColor();
 
 	const getDominantColor = async () => {
-		let color = await fac.getColorAsync(imgUrl);
-		console.log(color.hex);
-		return color.hex;
+		let _color = await fac.getColorAsync(imgUrl);
+		return _color.hex;
 	};
 </script>
 
 <div
-	class="w-full p-3 flex justify-between items-center bg-original-gray rounded-xl overflow-hidden"
+	class="w-full p-3 flex justify-between items-center bg-original-gray rounded-xl overflow-hidden mb-4"
 >
 	<div class="flex flex-row justify-center items-center">
 		<!-- Bot picture -->
-		<div class="relative">
-			{#await getDominantColor() then color}
-				<div class="absolute bg-[{color.trim()}] blur-2xl h-12 w-12 top-0 left-0" />
-			{/await}
-			<img src={imgUrl} alt="" class="relative h-12 w-12 bg-red-600 mr-4 rounded-full z-10" />
-		</div>
+		{#await getDominantColor() then color}
+			<div class="relative">
+				<div class="absolute blur-2xl h-12 w-12 top-0 left-0" style="background-color: {color};" />
+				<img src={imgUrl} alt="" class="relative h-12 w-12 bg-red-600 mr-4 rounded-full z-10" />
+			</div>
+		{/await}
 		<!-- Bot Name -->
 		<Text class="font-bold">{name}</Text>
 	</div>
