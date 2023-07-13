@@ -21,7 +21,7 @@
 			<BotCard imgUrl={bot.imgUrl} name={bot.name} />
 		{/each}
 	</div>
-	<!-- Issue with arrow that should be fatter and isn't aligned with the rest of the text -->
+	<!-- TODO: Issue with arrow that should be fatter and isn't aligned with the rest of the text -->
 	<Button style="primary" action={() => openNewBotDialog()}>
 		Ajoutez un bot <box-icon name="right-arrow-alt" color="white" />
 	</Button>
