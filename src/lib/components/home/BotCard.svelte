@@ -19,10 +19,15 @@
 >
 	<div class="flex flex-row justify-center items-center">
 		<!-- Bot picture -->
-		{#await getDominantColor() then color}
+		{#await getDominantColor()}
+			<div class="relative">
+				<div class="absolute blur-2xl h-12 w-12 top-0 left-0 bg-gray-500" />
+				<div class="relative h-12 w-12 bg-gray-500 mr-4 rounded-full z-10 animate-pulse"></div>
+			</div>
+		{:then color}
 			<div class="relative">
 				<div class="absolute blur-2xl h-12 w-12 top-0 left-0" style="background-color: {color};" />
-				<img src={imgUrl} alt="" class="relative h-12 w-12 bg-red-600 mr-4 rounded-full z-10" />
+				<img src={imgUrl} alt="" class="relative h-12 w-12 bg-gray-500 mr-4 rounded-full z-10" />
 			</div>
 		{/await}
 		<!-- Bot Name -->
