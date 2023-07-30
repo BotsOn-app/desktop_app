@@ -14,7 +14,7 @@
 <button
 	class="text-white font-bold shadow-lg font-prompt p-3 pl-10 pr-10 rounded-xl mr-12 hover:bg-opacity-40 transition ease-in-out text-2xl {styleMap[
 		style
-	]} flex justify-center items-center"
+	]} flex justify-center items-center gap-1.5"
 	on:click={action}
 >
 	<slot />
