@@ -11,7 +11,19 @@
 	},
 	"tauri": {
 		"allowlist": {
-			"all": true
+			"all": true,
+			"http": {
+				"scope": ["https://discord.com/api/v10/users/*"]
+			},
+			"path": {
+				"all": true
+			},
+			"fs": {
+				"readFile": true,
+				"scope": [
+					"$APPDATA/bots/*"
+				]
+			}
 		},
 		"bundle": {
 			"active": true,
@@ -61,5 +73,6 @@
 				"width": 1080
 			}
 		]
+
 	}
 }
