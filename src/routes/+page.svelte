@@ -16,6 +16,7 @@
 	};
 
 
+	// We get an error here : this is totally normal. We can't make the fetch request as the provided token and clientId are bullshit.
 	const handleForm = async (token: string, clientId: string) => {
 		let client = await getClient();
 
