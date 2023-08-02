@@ -49,6 +49,6 @@
 	</div>
 	<!-- TODO: Issue with arrow that should be fatter and isn't aligned with the rest of the text -->
 	<Button style="primary" action={() => handleForm("bot_token", "client_id")}>
-		Ajoutez un bot <box-icon name="right-arrow-alt" color="white" />
+		Ajoutez un bot <box-icon size="md" name="right-arrow-alt" color="white" />
 	</Button>
 </main>
