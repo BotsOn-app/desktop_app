@@ -48,7 +48,7 @@
 		{/each}
 	</div>
 	<!-- TODO: Issue with arrow that should be fatter and isn't aligned with the rest of the text -->
-	<Button style="primary" action={() => handleForm("ODYyNzQ1MDAwNjQzNTI2NjY2.GKtPgx.zf8QyHxXNxUGAQP9k1q6jFxrNnBMMY7Oc6HeHA", "862745000643526666")}>
+	<Button style="primary" action={() => handleForm("bot_token", "client_id")}>
 		Ajoutez un bot <box-icon name="right-arrow-alt" color="white" />
 	</Button>
 </main>
