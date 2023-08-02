@@ -1,17 +1,21 @@
 <script lang="ts">
+	import { invoke } from '@tauri-apps/api/tauri';
 	import ActionButton from '../utils/ActionButton.svelte';
 	import Text from '../utils/Text.svelte';
-	import { goto } from '$app/navigation';
 	import { FastAverageColor } from 'fast-average-color';
-	export let imgUrl: string;
-	export let name: string;
 
+	export let bot: any;
+	
 	const fac = new FastAverageColor();
 
 	const getDominantColor = async () => {
-		let _color = await fac.getColorAsync(imgUrl);
+		let _color = await fac.getColorAsync(bot.avatarUrl);
 		return _color.hex;
 	};
+
+	const deleteBot = () => invoke('delete_bot', { token: bot.token })
+
+	
 </script>
 
 <div
@@ -27,14 +31,14 @@
 		{:then color}
 			<div class="relative">
 				<div class="absolute blur-2xl h-12 w-12 top-0 left-0" style="background-color: {color};" />
-				<img src={imgUrl} alt="" class="relative h-12 w-12 bg-gray-500 mr-4 rounded-full z-10" />
+				<img src={bot.avatarUrl} alt="" class="relative h-12 w-12 bg-gray-500 mr-4 rounded-full z-10" />
 			</div>
 		{/await}
 		<!-- Bot Name -->
-		<Text class="font-bold">{name}</Text>
+		<Text class="font-bold">{bot.name}</Text>
 	</div>
 	<div class="flex flex-row justify-around items-center w-44">
-		<ActionButton buttonType="danger" action={() => {}}>
+		<ActionButton buttonType="danger" action={() => deleteBot()}>
 			<box-icon type="solid" name="trash" color="white" />
 		</ActionButton>
 		<ActionButton buttonType="info" action={() => {}}>
@@ -45,3 +49,4 @@
 		</ActionButton>
 	</div>
 </div>
+
